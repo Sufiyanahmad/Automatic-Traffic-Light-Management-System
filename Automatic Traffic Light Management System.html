@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Automatic Traffic Light Management System</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: white;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .traffic-light {
+      width: 100px;
+      background-color: #333;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    .light {
+      width: 60px;
+      height: 60px;
+      margin: 15px auto;
+      border-radius: 50%;
+      background-color: #111;
+      transition: background-color 0.5s;
+      box-shadow: 0 0 10px #000 inset;
+    }
+
+    .red.active {
+      background-color: red;
+      box-shadow: 0 0 20px red;
+    }
+
+    .yellow.active {
+      background-color: yellow;
+      box-shadow: 0 0 20px yellow;
+    }
+
+    .green.active {
+      background-color: green;
+      box-shadow: 0 0 20px green;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🚦 Automatic Traffic Light System</h1>
+
+  <div class="traffic-light">
+    <div class="light red" id="red"></div>
+    <div class="light yellow" id="yellow"></div>
+    <div class="light green" id="green"></div>
+  </div>
+
+  <footer>Developed using HTML, CSS, and JavaScript</footer>
+
+  <script>
+    let current = 0;
+    const lights = ['red', 'green', 'yellow'];
+
+    function changeLight() {
+      // Remove 'active' from all lights
+      lights.forEach(color => {
+        document.getElementById(color).classList.remove('active');
+      });
+
+      // Add 'active' to current light
+      const activeColor = lights[current];
+      document.getElementById(activeColor).classList.add('active');
+
+      // Set timeout duration based on light
+      let duration = 3000; // default
+      if (activeColor === 'yellow') {
+        duration = 1500;
+      }
+
+      // Move to next light
+      current = (current + 1) % lights.length;
+
+      setTimeout(changeLight, duration);
+    }
+
+    // Start the light cycle
+    changeLight();
+  </script>
+
+</body>
+</html>
